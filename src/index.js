@@ -4,13 +4,12 @@ import "./index.css"
 import App from "./containers/App"
 import "tachyons"
 import { Provider } from "react-redux"
-import { createStore } from "redux"
+import { createStore, applyMiddleware } from "redux"
 import { searchRobot } from "./reducers"
+import { createLogger } from "redux-logger"
 
-let store = createStore(
-  searchRobot,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+const logger = createLogger()
+const store = createStore(searchRobot, applyMiddleware(logger))
 ReactDOM.render(
   <Provider store={store}>
     {" "}
